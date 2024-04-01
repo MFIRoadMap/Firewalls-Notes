@@ -86,8 +86,22 @@ end
 
 
 //Captive Portal konfigürasyonu
+config user local
+edit User1
+set type password
+set passwd 1234
+set status enable
+next
+end
+
+config user group 
+edit newGroup
+member User1
+end
+
+
 config user security-exempt-list
-edit MyExetmpList
+edit MyExemptList
 config rule 
 edit 1
 set srcaddr DeviceH
@@ -98,11 +112,9 @@ end
 config system interface 
 edit port2
 set security-mode captive-portal
-set security-exempt-list MyExetmpList
-next
+set security-groups newGroup
+set security-exempt-list MyExemptList
 end
-
-
 
 
 
