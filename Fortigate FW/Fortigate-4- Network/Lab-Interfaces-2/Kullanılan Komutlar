@@ -4,8 +4,8 @@ Fortigate
 config system interface 
 edit LACPInterface
 set vdom root
-set member port3 port4
 set type aggregate
+set member port3 port4
 set role lan
 end
 
@@ -61,6 +61,26 @@ set span enable
 set span-source-port port5
 set span-dest-port port6
 set span-direction both
+end
+
+
+//Redundancy konfigürasyonu
+config system interface 
+edit RedundancyInter
+set vdom root
+set type redundant
+set member port7 port8
+set ip 192.168.60.1 255.255.255.0
+set allowaccess ping
+set role lan
+end
+
+
+//Zone konfigürasyonu
+config system zone
+edit Zone-2
+set interface RedundancyInter port9 port10 
+set intrazone deny
 end
 
 
@@ -123,24 +143,27 @@ mode lacp-static
 quit
 commit
 
+
+
+
+
+
+
+CE6800-3
+---------------------------------------------
+system-view
+sysname CE6800-3
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7 
+portswitch
+undo sh
+quit
 commit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
