@@ -84,7 +84,24 @@ set intrazone deny
 end
 
 
+//
+config system virtual-wire-pair
+edir vwp1
+set member port11 port12
+end
 
+config firewall policy
+edit 1
+set name "VWP-Policy"
+set srcintf port11 port12
+set dstintf port11 port12
+set srcaddr all
+set dstaddr all
+set action accept
+set schedule always
+set service ALL
+next
+end
 
 
 
