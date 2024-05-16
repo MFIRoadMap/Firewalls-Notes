@@ -86,8 +86,9 @@ end
 
 //
 config system virtual-wire-pair
-edir vwp1
+edit vwp1
 set member port11 port12
+set wildcard-vlan disable
 end
 
 config firewall policy
