@@ -1,24 +1,18 @@
 CE6800-SW
 ----------------------------------------
+system-view
+sysname CE6800-SW
+int range ge 1/0/0 to ge 1/0/10
+portswitch
+quit
+quit
+save
+y
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Fortigate
+Fortigate Only Web Filter and App Control Configs
 ----------------------------------------
 
 # WEB FILTER CONFİG 
@@ -109,6 +103,7 @@ config ftgd-wf
 set options error-allow rate-server-ip
 end
 end
+
 
 
 
