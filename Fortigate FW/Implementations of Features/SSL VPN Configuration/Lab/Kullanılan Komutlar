@@ -8,6 +8,10 @@ CE6800-SW
 
 fortigate-1
 -------------------------------------------
+config system global
+set hostname Fortigate-1
+end
+
 config system interface 
 #SSL BAĞLANTISI YAPILACAK DIŞ BACAK IP ADRESİ
 edit port8
@@ -47,14 +51,6 @@ next
 edit WinServ-1
 set type ipmask
 set subnet 10.10.10.10/32
-next
-edit Port2_IP_Pool
-set type ipmask
-set subnet 10.10.50.0/24
-next
-edit Port8_IP_Pool
-set type ipmask
-set subnet 5.5.5.0/24
 end 
 
 
@@ -145,6 +141,11 @@ end
 
 fortigate-2
 -------------------------------------------
+config system global
+set hostname Fortigate-2
+end
+
+
 config system interface 
 edit port8
 set vdom root
@@ -162,18 +163,18 @@ end
 
 
 config firewall address
-edit Port2_IP_Pool
+edit SSL_VPN_Addr_1
 set type ipmask
 set subnet 10.10.50.0/24
 next
-edit Port8_IP_Pool
+edit Win_Srv_IP_POOL
 set type ipmask
 set subnet 10.10.10.0/24
 end 
 
 config router static
 edit 1
-set dst 5.5.5.0/24
+set dst 10.10.200.0/24
 set gateway 10.10.50.1
 set device port2
 end
@@ -184,8 +185,8 @@ edit 10
 set name Win_Srv_to_MFI_SSL
 set srcintf port8
 set dstintf port2
-set srcaddr Port8_IP_Pool
-set dstaddr Port2_IP_Pool
+set srcaddr Win_Srv_IP_POOL
+set dstaddr SSL_VPN_Addr_1
 set action accept
 set schedule always
 set service ALL
@@ -194,8 +195,8 @@ edit 11
 set name MFI_SSL_to_Win_Srv
 set srcintf port2
 set dstintf port8
-set srcaddr Port2_IP_Pool
-set dstaddr Port8_IP_Pool
+set srcaddr SSL_VPN_Addr_1
+set dstaddr Win_Srv_IP_POOL
 set action accept
 set schedule always
 set service ALL
