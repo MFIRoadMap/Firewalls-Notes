@@ -155,8 +155,51 @@ end
 
 
 
+config firewall traffic-class
+edit 3
+set class-name "Realtime Access"
+next
+edit 4
+set class-name "Default Access"
+end
 
 
+config firewall shaping-profile
+edit "MyNetworkX"
+set default-class-id 4
+config shaping-entries
+edit 1
+set class-id 3
+set guaranteed-bandwidth-percentage 40
+set maximum-bandwidth-percentage 45
+set priority high
+next
+edit 2
+set class-id 4
+set priority medium
+set guaranteed-bandwidth-percentage 60
+set maximum-bandwidth-percentage 80
+set priority medium
+end
+end
 
 
+config system interface
+edit port1
+set egress-shaping-profile "MyNetworkX"
+set outbandwidth 10000
+next
+end
 
+
+config firewall shaping-policy
+edit 2
+set name VLAN20_to_Internet_Shaper
+set srcaddr VLAN20_Addr
+set dstaddr all
+set service ALL
+set application 24426 34640
+set url-category 20 49 76 95
+set dstintf port1
+set class-id 3
+end
