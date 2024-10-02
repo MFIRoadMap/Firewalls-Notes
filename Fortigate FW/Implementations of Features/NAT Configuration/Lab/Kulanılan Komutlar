@@ -218,32 +218,6 @@ VPC2 : ip 10.10.40.10 255.255.255.0 10.10.40.1
 
 
 
-SNAT UYGULAMASI
-------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 cihaz sıfırlama ve ilk kurulum
@@ -251,7 +225,7 @@ cihaz sıfırlama ve ilk kurulum
 admin
 
 eve
-eve 
+eve
 
 execute factoryreset
 y
